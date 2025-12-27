@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Project Path="BikeStoreWeb.API/BikeStoreWeb.API.csproj" />
+  <Project Path="BikeStoreWeb.Core/BikeStoreWeb.Core.csproj" />
+  <Project Path="BikeStoreWeb.Data/BikeStoreWeb.Data.csproj" />
+  <Project Path="BikeStoreWeb.Service/BikeStoreWeb.Service.csproj" />
+</Solution>

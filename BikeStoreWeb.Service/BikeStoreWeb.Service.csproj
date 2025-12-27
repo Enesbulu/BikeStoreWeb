@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjeAdim.Core\ProjeAdim.Core.csproj" />
+    <ProjectReference Include="..\BikeStoreWeb.Data\BikeStoreWeb.Data.csproj" />
+    <ProjectReference Include="..\BikeStoreWeb.Core\BikeStoreWeb.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
