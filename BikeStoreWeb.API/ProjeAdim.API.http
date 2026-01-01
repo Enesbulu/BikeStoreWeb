@@ -1,6 +1,0 @@
-@ProjeAdim.API_HostAddress = http://localhost:5249
-
-GET {{ProjeAdim.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

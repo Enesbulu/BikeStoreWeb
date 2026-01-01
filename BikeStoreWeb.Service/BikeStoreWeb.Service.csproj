@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BikeStoreWeb.Data\BikeStoreWeb.Data.csproj" />
     <ProjectReference Include="..\BikeStoreWeb.Core\BikeStoreWeb.Core.csproj" />
   </ItemGroup>
