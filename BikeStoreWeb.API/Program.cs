@@ -36,7 +36,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(
         opt =>
         {
-            opt.SwaggerEndpoint("/swagger/v2/swagger.json", "v2");
+            opt.SwaggerEndpoint("swagger/index.html", "v1");
             opt.RoutePrefix = string.Empty;
         }
     );

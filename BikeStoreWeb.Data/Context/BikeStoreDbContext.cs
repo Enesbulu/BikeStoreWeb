@@ -28,5 +28,10 @@ namespace BikeStoreWeb.Data.Context
             modelBuilder.Entity<OrderItem>().Property(oi => oi.Price).HasColumnType("decimal(18,2)");
             base.OnModelCreating(modelBuilder);
         }
+
+        public override int SaveChanges()
+        {
+            return base.SaveChanges();
+        }
     }
 }

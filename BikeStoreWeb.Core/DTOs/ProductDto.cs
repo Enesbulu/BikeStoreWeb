@@ -1,4 +1,4 @@
-﻿namespace BikeStoreWeb.Service.DTOs
+﻿namespace BikeStoreWeb.Core.DTOs
 {
     public class ProductDto
     {
