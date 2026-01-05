@@ -1,6 +1,7 @@
 ﻿using BikeStoreWeb.Core.DTOs;
 using BikeStoreWeb.Core.Interfaces;
 using BikeStoreWeb.Core.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BikeStoreWeb.API.Controllers
@@ -24,6 +25,7 @@ namespace BikeStoreWeb.API.Controllers
         /// <param name="checkoutDto">The checkout information used to create the order. Must contain all required order and payment details.</param>
         /// <returns>An ActionResult containing a ServiceResponse with the created order details if successful; otherwise, a
         /// ServiceResponse with error information.</returns>
+        [Authorize]
         [HttpPost("checkout")]
         public ActionResult<ServiceResponse<OrderDto>> CheckOut(CheckoutDto checkoutDto)
         {

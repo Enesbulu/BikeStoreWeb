@@ -5,7 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+
+
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -54,8 +58,33 @@ builder.Services.AddDbContext<BikeStoreDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Bearer {token}\"",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+        {
+            {
+                new OpenApiSecurityScheme
+                {
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id= "Bearer"
+                    }
+                },
+                new string[] { }
+            }
+        });
+}
+);
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
@@ -63,13 +92,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
     app.MapSwagger();
     app.UseSwagger();
     app.UseSwaggerUI(
         opt =>
         {
-            opt.SwaggerEndpoint("swagger/v1/swagger.json", "v1");
+            opt.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
             opt.RoutePrefix = string.Empty;
         }
     );

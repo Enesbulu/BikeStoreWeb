@@ -18,6 +18,7 @@ namespace BikeStoreWeb.Service
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IShoppingCartService, ShoppingCartService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IAuthService, AuthService>();
         }
     }
 }
