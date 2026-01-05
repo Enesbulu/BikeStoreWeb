@@ -3,7 +3,7 @@
     public class Order : BaseEntity
     {
         public string OrderNumber { get; set; }
-        public string UserId { get; set; }
+        public int CustomerId { get; set; }
         public decimal TotalAmount { get; set; }
         public DateTime OrderDate { get; set; } = DateTime.Now;
         public string Status { get; set; }
