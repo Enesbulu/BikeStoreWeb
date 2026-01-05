@@ -2,11 +2,13 @@
 using BikeStoreWeb.Core.Interfaces;
 using BikeStoreWeb.Core.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
 namespace BikeStoreWeb.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")] // api/v1/auth
     public class AuthController : ControllerBase
     {
         private readonly IAuthService _authService;

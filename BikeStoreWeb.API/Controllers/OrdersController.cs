@@ -3,11 +3,13 @@ using BikeStoreWeb.Core.Interfaces;
 using BikeStoreWeb.Core.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
 namespace BikeStoreWeb.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")] // api/v1/orders
     public class OrdersController : ControllerBase
     {
         private readonly IOrderService _orderService;

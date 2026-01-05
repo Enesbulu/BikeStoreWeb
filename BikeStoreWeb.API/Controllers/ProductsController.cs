@@ -2,12 +2,15 @@
 using BikeStoreWeb.Core.Responses;
 using BikeStoreWeb.Core.Services;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
 
 namespace BikeStoreWeb.API.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
