@@ -1,10 +1,11 @@
 ﻿using BikeStoreWeb.Core.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace BikeStoreWeb.Data.Context
 {
-    public class BikeStoreDbContext : DbContext
+    public class BikeStoreDbContext : IdentityDbContext<ApplicationUser>
     {
         public BikeStoreDbContext(DbContextOptions<BikeStoreDbContext> options)
          : base(options)
