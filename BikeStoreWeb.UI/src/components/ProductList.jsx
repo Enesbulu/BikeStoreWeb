@@ -1,23 +1,27 @@
+// src/components/ProductList.jsx
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+// Bootstrap bileşenlerini import ediyoruz
+import { Row, Col, Card, Button, Spinner, Alert, Badge } from 'react-bootstrap';
+import { useCart } from '../context/CartContext';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const { addToCart } = useCart();
+
     useEffect(() => {
-        // Backend'den ürünleri çek
         const fetchProducts = async () => {
             try {
-                // GET /products endpoint'ine istek at
                 const response = await api.get('/products');
-                // Backend'den gelen veri yapısına göre (ServiceResponse.Data)
-                // Eğer response.data.data ise:
+                // Backend'in yapısına göre data.data veya direkt data olabilir,
+                // Senin yapına göre response.data.data doğruydu.
                 setProducts(response.data.data);
             } catch (err) {
                 console.error("Hata:", err);
-                setError("Ürünler yüklenirken bir hata oluştu.");
+                setError("Ürünler yüklenirken sunucu ile bağlantı kurulamadı.");
             } finally {
                 setLoading(false);
             }
@@ -26,24 +30,52 @@ const ProductList = () => {
         fetchProducts();
     }, []);
 
-    if (loading) return <div className="text-center mt-5">Yükleniyor...</div>;
-    if (error) return <div className="alert alert-danger">{error}</div>;
+    // Yükleniyor Ekranı
+    if (loading) return (
+        <div className="text-center mt-5">
+            <Spinner animation="border" variant="primary" />
+            <p className="mt-2">Bisikletler getiriliyor...</p>
+        </div>
+    );
+
+    // Hata Ekranı
+    if (error) return <Alert variant="danger" className="text-center">{error}</Alert>;
 
     return (
-        <div className="row">
-            {products.map((product) => (
-                <div key={product.id} className="col-md-4 mb-4">
-                    <div className="card h-100 shadow-sm">
-                        <div className="card-body">
-                            <h5 className="card-title">{product.name}</h5>
-                            <p className="card-text">{product.description}</p>
-                            <h6 className="text-primary">${product.price}</h6>
-                            <button className="btn btn-sm btn-outline-primary w-100">Sepete Ekle</button>
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
+        <>
+            <h2 className="text-center mb-4 text-dark fw-bold">🚲 Öne Çıkan Ürünler</h2>
+            <Row>
+                {/* map fonksiyonu ürünleri tek tek döner */}
+                {products.map((product) => (
+                    <Col key={product.id} sm={12} md={6} lg={4} className="mb-4">
+                        <Card className="h-100 shadow border-0 product-card">
+                            {/* Resim alanı (Şimdilik placeholder resim) */}
+                            <Card.Img
+                                variant="top"
+                                src={product.imageUrl || "https://placehold.co/600x400/EEE/31343C?text=BikeStore"}
+                                style={{ height: '200px', objectFit: 'cover' }}
+                            />
+                            <Card.Body className="d-flex flex-column">
+                                <div className="d-flex justify-content-between align-items-start mb-2">
+                                    <Card.Title>{product.name}</Card.Title>
+                                    <Badge bg="success">${product.price}</Badge>
+                                </div>
+
+                                <Card.Text className="text-muted flex-grow-1">
+                                    {product.description.substring(0, 100)}...
+                                </Card.Text>
+
+                                <div className="d-grid gap-2">
+                                    <Button variant="primary" onClick={() => addToCart(product)}>
+                                        Sepete Ekle 🛒
+                                    </Button>
+                                </div>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
+            </Row>
+        </>
     );
 };
 
