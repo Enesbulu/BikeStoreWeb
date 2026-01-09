@@ -6,7 +6,7 @@ namespace BikeStoreWeb.Core.Interfaces
     public interface IShoppingCartService
     {
         //Bir müşterinin sepetini getirir.
-        ServiceResponse<List<ShoppingCartItemDto>> GetCartByCustomerId(int customerId);
+        ServiceResponse<List<ShoppingCartItemDto>> GetCartByCustomerId(string customerId);
         //Sepete ürün ekler veya miktar arttırır.
         ServiceResponse<bool> AddToCart(AddToCartDto addToCartDto);
 
@@ -14,6 +14,6 @@ namespace BikeStoreWeb.Core.Interfaces
         ServiceResponse<bool> RemoveFromCart(int id);
 
         //Sipariş sonrası sepeti tamamen boşaltır.
-        ServiceResponse<bool> ClearCart(int customerId, int cartId);
+        ServiceResponse<bool> ClearCart(string customerId, int cartId);
     }
 }

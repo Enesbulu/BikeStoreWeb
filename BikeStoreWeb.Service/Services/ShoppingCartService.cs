@@ -15,7 +15,7 @@ namespace BikeStoreWeb.Service.Services
         {
             _dbContext = dbContext;
         }
-        public ServiceResponse<List<ShoppingCartItemDto>> GetCartByCustomerId(int customerId)
+        public ServiceResponse<List<ShoppingCartItemDto>> GetCartByCustomerId(string customerId)
         {
             var response = new ServiceResponse<List<ShoppingCartItemDto>>();
             var cartItem = _dbContext.ShoppingCartItems
@@ -97,7 +97,7 @@ namespace BikeStoreWeb.Service.Services
             return response;
         }
 
-        public ServiceResponse<bool> ClearCart(int customerId, int cartId)
+        public ServiceResponse<bool> ClearCart(string customerId, int cartId)
         {
             var response = new ServiceResponse<bool>();
             var items = _dbContext.ShoppingCartItems

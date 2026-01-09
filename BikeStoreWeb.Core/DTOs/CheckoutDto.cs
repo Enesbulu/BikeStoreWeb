@@ -2,6 +2,8 @@
 {
     public class CheckoutDto
     {
-        public int CustomerId { get; set; }
+        public string? CustomerId { get; set; }
+        public string ShippingAddress { get; set; }
+        public List<OrderItemDto> OrderItems { get; set; }
     }
 }

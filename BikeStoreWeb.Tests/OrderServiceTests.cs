@@ -23,7 +23,7 @@ namespace BikeStoreWeb.Tests
             //1.Arrange-Hazırlık
             var context = GetInMemoryDbContext();
 
-
+            var userId = Guid.NewGuid().ToString();
             //--- Sahte veri girişi
 
             //Ürün ekleme
@@ -40,7 +40,7 @@ namespace BikeStoreWeb.Tests
             var cartItem = new ShoppingCartItem
             {
                 ProductId = 1,
-                CustomerId = 1,
+                CustomerId = userId,
                 Quantity = 2
             };
             context.ShoppingCartItems.Add(cartItem);
@@ -51,7 +51,7 @@ namespace BikeStoreWeb.Tests
             var orderService = new OrderService(context);
 
             //Test girdisi
-            var checkoutDto = new CheckoutDto { CustomerId = 1 };
+            var checkoutDto = new CheckoutDto { CustomerId = "3ed768c9-7aca-43a7-956a-fc25a2a73c58" };
 
             //--- ACT-Eylem
             //Metod çalıştırma
@@ -67,7 +67,7 @@ namespace BikeStoreWeb.Tests
             //Veritabanunda sipariş var mı kontrolü
             var orderInDb = context.Orders.FirstOrDefault();
             Assert.NotNull(orderInDb);
-            Assert.Equal(1, orderInDb.CustomerId);
+            Assert.Equal(userId, orderInDb.CustomerId);
 
             //Fiyat hesaplaması doğru mu kontrolü
             Assert.Equal(2000, orderInDb.TotalAmount);
@@ -82,12 +82,12 @@ namespace BikeStoreWeb.Tests
         {
             //--- Hazırlık 
             var context = GetInMemoryDbContext();
-
+            var id = Guid.NewGuid();
             //Sepet boş bırakılıyor
             var orderService = new OrderService(context);
             var checkOutDto = new CheckoutDto
             {
-                CustomerId = 99,    //olmayan bir müşteri
+                CustomerId = (id).ToString(),    //olmayan bir müşteri
             };
 
             //---- Eylem,

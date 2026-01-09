@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 
 
 function App() {
@@ -27,10 +28,11 @@ function App() {
             {/*Kayıt SAyfası*/}
             <Route path="/register" element={<Register />} />
 
-            {/*Kayıt SAyfası*/}
+            {/*Sepet Sayfası*/}
             <Route path="/cart" element={<Cart />} />
 
-
+            {/*Sipariş Sayfası*/}
+            <Route path="/checkout" element={<Checkout />} />
 
           </Routes>
         </div>
