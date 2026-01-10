@@ -1,98 +1,71 @@
-# \# 🚴 BikeStore E-Commerce Application
+#  🚴 BikeStore E-Commerce Application
 
-# 
+#### Bu proje, modern yazılım mimarileri kullanılarak geliştirilmiş, **Full-Stack** bir e-ticaret uygulamasıdır. Kullanıcılara ürün inceleme, sepete ekleme (hem yerel hem veritabanı senkronizasyonlu) ve sipariş verme deneyimi sunar.
 
-# Bu proje, modern yazılım mimarileri kullanılarak geliştirilmiş, \*\*Full-Stack\*\* bir e-ticaret uygulamasıdır. Kullanıcılara ürün inceleme, sepete ekleme (hem yerel hem veritabanı senkronizasyonlu) ve sipariş verme deneyimi sunar.
 
-# 
+## 🚀 Özellikler (Features)
 
-# !\[Project Status](https://img.shields.io/badge/status-stable-green)
 
-# !\[License](https://img.shields.io/badge/license-MIT-blue)
+### Backend (.NET Core API)
 
-# 
+*N-Tier Architecture:* Katmanlı mimari yapısı (Core, Data, Service, API).
 
-# \## 🚀 Özellikler (Features)
+ *Generic Repository Pattern:* Veri erişiminde soyutlama ve kod tekrarını önleme.
 
-# 
+*JWT Authentication:* Güvenli kimlik doğrulama ve yetkilendirme.
 
-# \### Backend (.NET Core API)
+*Entity Framework Core:* Code-First yaklaşımı ile veritabanı yönetimi.
 
-# \* \*\*N-Tier Architecture:\*\* Katmanlı mimari yapısı (Core, Data, Service, API).
+*Hybrid Cart Logic:* Sepet verisi hem veritabanında saklanır hem de performans için yönetilir.
 
-# \* \*\*Generic Repository Pattern:\*\* Veri erişiminde soyutlama ve kod tekrarını önleme.
+*DTO (Data Transfer Objects):* Veri bütünlüğü ve güvenliği için modeller arası taşıma.
 
-# \* \*\*JWT Authentication:\*\* Güvenli kimlik doğrulama ve yetkilendirme.
+### Frontend (React + Vite)
 
-# \* \*\*Entity Framework Core:\*\* Code-First yaklaşımı ile veritabanı yönetimi.
+*Context API:* Global State yönetimi (CartContext, AuthContext).
 
-# \* \*\*Hybrid Cart Logic:\*\* Sepet verisi hem veritabanında saklanır hem de performans için yönetilir.
+*Axios Interceptors:* HTTP isteklerinde otomatik Token yönetimi.
 
-# \* \*\*DTO (Data Transfer Objects):\*\* Veri bütünlüğü ve güvenliği için modeller arası taşıma.
+*LocalStorage Sync:* Oturum kapalıyken bile sepetin korunması.
 
-# 
+*Responsive UI:* Bootstrap ile mobil uyumlu tasarım.
 
-# \### Frontend (React + Vite)
+*Protected Routes:* Giriş yapmamış kullanıcıların erişimini kısıtlama.
 
-# \* \*\*Context API:\*\* Global State yönetimi (CartContext, AuthContext).
+## 🛠️ Teknolojiler (Tech Stack)
 
-# \* \*\*Axios Interceptors:\*\* HTTP isteklerinde otomatik Token yönetimi.
+*Backend:* ASP.NET Core Web API, C#, SQL Server
 
-# \* \*\*LocalStorage Sync:\*\* Oturum kapalıyken bile sepetin korunması.
+*Frontend:* React.js, Vite, Bootstrap 5
 
-# \* \*\*Responsive UI:\*\* Bootstrap ile mobil uyumlu tasarım.
+*Veritabanı:* MSSQL (Microsoft SQL Server)
 
-# \* \*\*Protected Routes:\*\* Giriş yapmamış kullanıcıların erişimini kısıtlama.
+*Araçlar:* Visual Studio, VS Code, Swagger UI, Postman
 
-# 
+## 📸 Ekran Görüntüleri (Screenshots)
 
-# \## 🛠️ Teknolojiler (Tech Stack)
+### ![alt text](image.png)
+## ![alt text](image-1.png)
+# ![alt text](image-2.png)
 
-# 
+# ⚙️ Kurulum (Installation)
 
-# \* \*\*Backend:\*\* ASP.NET Core Web API, C#, SQL Server
+## Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
 
-# \* \*\*Frontend:\*\* React.js, Vite, Bootstrap 5
+### 1. Ön Gereksinimler
 
-# \* \*\*Veritabanı:\*\* MSSQL (Microsoft SQL Server)
+* .NET 10.0 SDK (veya üzeri)
 
-# \* \*\*Araçlar:\*\* Visual Studio, VS Code, Swagger UI, Postman
+* Node.js \& npm
 
-# 
+* SQL Server
 
-# \## 📸 Ekran Görüntüleri (Screenshots)
-
-# 
-
-# \*Ekran görüntüleri yakında eklenecektir...\*
-
-# 
-
-# \## ⚙️ Kurulum (Installation)
-
-# 
-
-# Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyin:
-
-# 
-
-# \### 1. Ön Gereksinimler
-
-# \* .NET 8.0 SDK (veya üzeri)
-
-# \* Node.js \& npm
-
-# \* SQL Server
-
-# 
-
-# \### 2. Backend Kurulumu
-
-# ```bash
+### 2. Backend Kurulumu
+```bash
 
 # cd BikeStoreWeb.API
 
-# \# appsettings.json dosyasındaki "ConnectionStrings" alanını kendi SQL sunucunuza göre düzenleyin.
+# appsettings.json dosyasındaki "ConnectionStrings" alanını kendi SQL sunucunuza göre düzenleyin.
 
 # dotnet restore
 
@@ -116,7 +89,4 @@
 * Orders & OrderItems: Sipariş geçmişi.
 
 * ShoppingCartItems: Kalıcı sepet verisi
-
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
+````
