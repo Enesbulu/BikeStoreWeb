@@ -7,6 +7,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import MyOrders from './components/MyOrders';
 
 
 function App() {
@@ -33,6 +34,9 @@ function App() {
 
             {/*Sipariş Sayfası*/}
             <Route path="/checkout" element={<Checkout />} />
+
+            {/*Sipariş Sayfası*/}
+            <Route path="/myorders" element={<MyOrders />} />
 
           </Routes>
         </div>

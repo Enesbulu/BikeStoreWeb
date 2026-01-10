@@ -55,6 +55,9 @@ const CustomNavbar = () => {
                         {userEmail ? (
                             // Kullanıcı Varsa:
                             <>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/myorders">Siparişlerim</Link>
+                                </li>
                                 <span className="text-light me-3">Merhaba, {userEmail.split('@')[0]}</span>
                                 <Button variant="outline-danger" size="sm" onClick={handleLogout}>
                                     Çıkış Yap

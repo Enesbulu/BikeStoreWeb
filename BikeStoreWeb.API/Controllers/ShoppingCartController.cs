@@ -37,13 +37,14 @@ namespace BikeStoreWeb.API.Controllers
         [Authorize]
         public ActionResult<ServiceResponse<bool>> AddToCart([FromBody] AddToCartDto addToCartDto)
         {
-            var userIdSting = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdSting, out int customerId))
+            //GÜVENLİK ADIMI: Token'dan CustomerId'yi çek
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
             {
-                return Unauthorized();
+                return Unauthorized(new { message = "Kullanıcı kimliği doğrulanamadı." });
             }
 
-            addToCartDto.CustomerId = (userIdSting);
+            addToCartDto.CustomerId = (userIdString);
 
             var response = _shoppingCartService.AddToCart(addToCartDto);
             if (!response.Success)
@@ -80,9 +81,9 @@ namespace BikeStoreWeb.API.Controllers
 
 
         //Ürün Silme
-        [HttpDelete]
+        [HttpDelete("remove/{productId}")]
         [Authorize]
-        public ActionResult<ServiceResponse<bool>> RemoveItemByProductId(int productId)
+        public ActionResult<ServiceResponse<bool>> RemoveItemByProductId([FromRoute]int productId)
         {
             //Bu metot ürünId'ye göre silme işlemi yapar.
             //Önce sepet öğesini bul

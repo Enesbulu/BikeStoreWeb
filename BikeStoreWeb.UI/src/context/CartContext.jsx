@@ -15,7 +15,7 @@ export const CartProvider = ({ children }) => {
     const isLoggedIn = () => !!localStorage.getItem('token');
 
 
-    //Sepetşn her değiştiğinde localeStorage a kaydediyoruz
+    //Sepetin her değiştiğinde localeStorage a kaydediyoruz
     useEffect(() => {
         localStorage.setItem('shoppingCart', JSON.stringify(cartItems));
     }, [cartItems]);
@@ -69,6 +69,7 @@ export const CartProvider = ({ children }) => {
         if (isLoggedIn()) {
             // Backend'e ekleme işlemi
             const payload = {
+                customerId: "0", // Gerekirse müşteri ID'si eklenebilir
                 productId: product.id,
                 quantity: 1
             };
@@ -78,6 +79,42 @@ export const CartProvider = ({ children }) => {
 
         };
         alert("Ürün sepete eklendi!");
+    };
+
+
+    //Sepetten ürün azaltma
+    const decreaseFromCart = (product) => {
+        setCartItems((prevItems) => {
+            const existingItem = prevItems.find((item) => item.id === product.id);
+            if (existingItem.quantity === 1) {
+                //Miktar 1 ise ürünü tamamen kaldır
+                return prevItems.filter((item) => item.id !== product.id);
+
+            } else {
+                //Miktar 1'den fazla ise miktarı azalt
+                return prevItems.map((item) => item.id === product.id ? { ...item, quantity: item.quantity - 1 } : item);
+            }
+        });
+
+        if (isLoggedIn()) {
+            // Backend'e azaltma işlemi
+            const payload = {
+                customerId: "0", // Gerekirse müşteri ID'si eklenebilir
+                productId: product.id,
+                quantity: -1
+            };
+            if (payload.quantity === 0) {
+                // Miktar 0 ise ürünü tamamen sil
+                api.delete(`/shoppingcart/remove/${product.id}`).then(() => console.log("Ürün DB sepetinden silindi."))
+                    .catch((err) => console.error("Ürün DB sepetinden silinirken hata oluştu:", err));
+            } else {
+                // Miktar 0'dan büyük ise güncelle
+                api.post('/shoppingcart/add', payload)
+                    .then(() => console.log("Ürün DB sepetinden azaltıldı."))
+                    .catch((err) => console.error("Ürün DB sepetinden azaltılırken hata oluştu:", err));
+            }
+        }
+        alert("Ürün sepetten azaltıldı!");
     };
 
     //sepetten ürün silme
@@ -110,8 +147,10 @@ export const CartProvider = ({ children }) => {
     //sepetteki toplam ürün sayısı
     const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
+
+    //context provider ile değerleri sağla ve children bileşenlerini sarmalama
     return (
-        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, cartTotal, cartCount }}> {children}</CartContext.Provider>
+        <CartContext.Provider value={{ cartItems, addToCart, removeFromCart, clearCart, cartTotal, cartCount, decreaseFromCart }}> {children}</CartContext.Provider>
     );
 };
 

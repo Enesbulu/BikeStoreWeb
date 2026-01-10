@@ -3,8 +3,7 @@ import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Cart = () => {
-    // Kullanılmayan handleDecrease'i sildik, hatalar gitti.
-    const { cartItems, addToCart, removeFromCart, clearCart, cartTotal } = useCart();
+    const { cartItems, addToCart, removeFromCart, clearCart, cartTotal, decreaseFromCart } = useCart();
     const navigate = useNavigate();
 
     // Sepet Boşsa
@@ -21,12 +20,12 @@ const Cart = () => {
     }
 
     return (
-        <Container className="mt-5">
+        <Container className="mt-2">
             <h2 className="mb-4">🛒 Alışveriş Sepetim</h2>
 
             <Row>
                 <Col md={8}>
-                    <Table responsive hover className="shadow-sm">
+                    <Table responsive hover className="shadow-sm mb-4">
                         <thead className="bg-light">
                             <tr>
                                 <th>Ürün</th>
@@ -51,9 +50,17 @@ const Cart = () => {
                                     </td>
                                     <td>${item.price}</td>
                                     <td>
-                                        {/* Artık addToCart kullanıldığı için hata vermeyecek */}
+
                                         <div className="d-flex align-items-center">
-                                            <span className="fw-bold mx-2 fs-5">{item.quantity}</span>
+                                            <Button
+                                                variant="outline-secondary"
+                                                size="sm"
+                                                className="rounded-circle"
+                                                onClick={() => decreaseFromCart(item)}
+                                            >
+                                                -
+                                            </Button>
+                                            <span className="fw-bold mx-2 fs-6">{item.quantity}</span>
                                             <Button
                                                 variant="outline-secondary"
                                                 size="sm"

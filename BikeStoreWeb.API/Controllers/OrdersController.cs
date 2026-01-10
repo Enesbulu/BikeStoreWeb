@@ -62,13 +62,13 @@ namespace BikeStoreWeb.API.Controllers
         [HttpGet("customer/orders")]
         public ActionResult<ServiceResponse<List<OrderDto>>> GetOrders()
         {
-            var userIdstring = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (!int.TryParse(userIdstring, out int customerId))
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userIdString))
             {
                 return Unauthorized(new { message = "Kullanıcı kimliği doğrulanamadı." });
             }
 
-            var response = _orderService.GetOrderByCustomerId(customerId);
+            var response = _orderService.GetOrderByCustomerId(userIdString);
             return Ok(response);
         }
 

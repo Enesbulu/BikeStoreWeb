@@ -200,7 +200,7 @@ namespace BikeStoreWeb.Service.Services
 
 
 
-        public ServiceResponse<List<OrderDto>> GetOrderByCustomerId(int customerId)
+        public ServiceResponse<List<OrderDto>> GetOrderByCustomerId(string customerId)
         {
             var response = new ServiceResponse<List<OrderDto>>();
 
